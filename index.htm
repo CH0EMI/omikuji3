@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>オンラインおみくじ</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, #a8c0ff, #ff9a8b, #f8ffae, #90ee90);
+      background-size: 400% 400%;
+      animation: gradient 6s ease infinite;
+    }
+
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      color: #fff;
+      margin-bottom: 20px;
+      line-height: 1.4;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 1.3rem;
+      background-color: #ff9a8b;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      margin: 10px;
+    }
+
+    button:hover {
+      background-color: #f8ffae;
+      transform: translateY(-3px);
+    }
+
+    .result {
+      margin-top: 30px;
+      font-size: 2.2rem;
+      font-weight: bold;
+      color: #444;
+      background-color: rgba(255, 255, 255, 0.7);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 80%;
+      display: inline-block;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      line-height: 1.5;
+      word-wrap: break-word;
+      position: relative;
+    }
+
+    .quote {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #2a2a2a;
+    }
+
+    .explanation {
+      font-size: 1rem;
+      color: #777;
+      margin-top: 20px;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <h1>あなたに贈る<br>言葉おみくじ</h1>
+    <button onclick="drawFortune()">おみくじを引く</button>
+    <div class="result hidden" id="result">
+      <div class="quote" id="quote"></div>
+      <div class="explanation" id="explanation"></div>
+      <div class="buttons">
+        <button onclick="drawFortune()">もう一度引く</button>
+        <button onclick="closeResult()">閉じる</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const fortunes = [
+      { 
+        quote: "人生は短いんだ。クッキーを食べよう。",
+        explanation: "日々の小さな楽しみを大切にしよう、というスヌーピーらしいユーモア溢れるメッセージ。"
+      },
+      { 
+        quote: "笑顔がない日なんて、最悪だよ。",
+        explanation: "笑顔の力を強調する名言。笑顔は周りも自分も幸せにする。"
+      },
+      { 
+        quote: "毎日が良い日じゃなくても、毎日には良いことがある。",
+        explanation: "一見平凡な日々の中にも、小さな幸せを見つける視点を教えてくれる。"
+      },
+      { 
+        quote: "疲れたらお昼寝すればいいんだよ。",
+        explanation: "シンプルだけど深い。無理をせず休むことで、次への力が湧いてくる。"
+      },
+      { 
+        quote: "全てが完璧じゃなくても、それが人生さ。",
+        explanation: "完璧主義にならず、ありのままの自分や状況を受け入れる大切さを伝えている。"
+      },
+      { 
+        quote: "ハッピーエンドじゃなくても、ハッピーな瞬間はあるよね。",
+        explanation: "物事が思い通りに進まなくても、小さな幸せは必ずあるという慰めの言葉。"
+      },
+      { 
+        quote: "空を見上げると、気持ちが軽くなるよ。",
+        explanation: "悩み事がある時でも、広い空を見れば少し心が楽になるという優しいアドバイス。"
+      },
+      { 
+        quote: "大事なのは、ゆっくり進んでも前に進むことだよ。",
+        explanation: "成長や前進には時間がかかることを肯定し、一歩一歩進むことの大切さを教えてくれる。"
+      },
+      { 
+        quote: "おいしい食べ物は、いつだって答えだ。",
+        explanation: "ストレスや悩みを解決するのは、時に美味しいご飯という気軽な発想が魅力的。"
+      },
+      { 
+        quote: "何もしない時間も大切なんだよ。",
+        explanation: "忙しい日々の中で、休息やぼーっとする時間の重要性を思い出させてくれる言葉。"
+      }
+    ];
+
+    function drawFortune() {
+      const fortune = fortunes[Math.floor(Math.random() * fortunes.length)];
+      document.getElementById("quote").innerText = fortune.quote;
+      document.getElementById("explanation").innerText = fortune.explanation;
+      document.getElementById("result").classList.remove("hidden");
+    }
+
+    function closeResult() {
+      document.getElementById("result").classList.add("hidden");
+    }
+  </script>
+</body>
+</html>
